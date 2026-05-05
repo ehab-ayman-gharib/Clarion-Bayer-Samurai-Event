@@ -81,10 +81,10 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({ imageSrc, rawImage, 
 
         const formData = new FormData();
         formData.append('image', blob, 'result.png');
-        formData.append('folder', 'Cairo-2100');
+        formData.append('folder', 'Clarion-Bayer-Samurai-Event');
         formData.append('metadata', JSON.stringify({
-          event: 'Cairo 2100 AUC Tahrir',
-          photobooth_id: 'Cairo_2100',
+          event: 'Clarion-Bayer-Samurai-Event',
+          photobooth_id: 'Clarion-Bayer-Samurai-Event',
           era: era.name,
           prompt: prompt
         }));
@@ -111,7 +111,7 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({ imageSrc, rawImage, 
   const handleDownload = () => {
     const link = document.createElement('a');
     link.href = imageSrc;
-    link.download = `Cairo-2100-${era.id}-${Date.now()}.png`;
+    link.download = `Clarion-Bayer-Samurai-Event-${era.id}-${Date.now()}.png`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
