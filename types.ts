@@ -1,4 +1,5 @@
 export enum AppScreen {
+  SCREEN_SAVER = 'SCREEN_SAVER',
   SPLASH = 'SPLASH',
   ERA_SELECTION = 'ERA_SELECTION',
   CAMERA = 'CAMERA',
@@ -8,17 +9,16 @@ export enum AppScreen {
 }
 
 export enum EraId {
-  TAHRIR = 'tahrir',
-  NILE = 'nile',
-  DOWNTOWN = 'downtown',
-  TOWER = 'tower',
-  KHAN = 'khan',
+  GUARDIAN = 'guardian',
+  LOTUS = 'lotus',
+  SHADOW = 'shadow',
+  SILENT = 'silent',
+  ASCENDANT = 'ascendant',
 }
 
 export interface EraData {
   id: EraId;
   name: string;
-  nameAr: string;
   description: string;
   promptInstructions: string;
 }

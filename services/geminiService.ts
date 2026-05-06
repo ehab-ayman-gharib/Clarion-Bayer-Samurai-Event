@@ -88,7 +88,7 @@ export const generateHistoricalImage = async (
   }
 
   if (faceData.childCount > 0) {
-    clothingParts.push(`the ${faceData.childCount > 1 ? 'children' : 'child'} MUST ONLY wear cute, age-appropriate futuristic tech-wear made from Egyptian cotton and smart fabrics`);
+    clothingParts.push(`the ${faceData.childCount > 1 ? 'children' : 'child'} MUST ONLY wear traditional Japanese-style robes with subtle glowing accents`);
   }
   const clothingDescription = clothingParts.join(", ");
 
@@ -96,23 +96,26 @@ export const generateHistoricalImage = async (
   const randomLighting = LIGHTING_STYLES[Math.floor(Math.random() * LIGHTING_STYLES.length)];
 
   // 4. Construct Unified Prompt
-  const prompt = `Reimagine ${subjectDescription} in an unmistakably Egyptian futuristic version of ${era.name}, Cairo, in the year 2100.
+  const prompt = `Reimagine ${subjectDescription} as heroic mystical warriors in a cinematic Japanese Dojo at night.
   
-  CRITICAL ARCHITECTURE: The historical silhouettes, limestone textures, and ornate architectural details of ${era.name} MUST be the dominant focal point. ${era.promptInstructions}.
+  CORE VISUAL THEME: 
+  - ${era.name}. 
+  - ${era.promptInstructions}.
   
   STYLE & ATMOSPHERE: 
-  - A fusion of "Ancient Soul" and "New Energy". 
-  - Avoid generic cyberpunk. Instead, use a "Neo-Egyptian" aesthetic: historical stone and wood textures merged with high-tech glass and bioluminescence.
+  - Dark, moody, and atmospheric setting. 
+  - Authentic Dojo elements: Tatami flooring, shoji screen windows, and subtle wooden textures.
   - LIGHTING: ${randomLighting}
  
   SUBJECT DETAILS:
   - CLOTHING (MANDATORY TRANSFORMATION): You MUST ABSOLUTELY ERASE and DISCARD all original clothing and accessories from the source image. COMPLETELY REPLACE the subject's outfit. The subject MUST ONLY wear: ${clothingDescription}. Ensure NO TRACE of the original garment/style remains visible.
   - Maintain the subject’s physical likeness, bone structure, and original pose exactly, but render them entirely in the new specified wardrobe.
+  - Each warrior MUST be holding their unique weapon: the mystical cyan feather blade with its glowing electric blue spine.
   
   ENVIRONMENT:
   - ${era.description}. 
-  - Ensure the environment feels clean and grounded, focusing on the architectural beauty and atmospheric lighting of futuristic Cairo.
-  - DRONE LIGHT SHOW: In the sky, a single luminous Egyptian symbol (such as an Ankh, Scarab, or Eye of Horus) is elegantly formed by glowing drones, appearing like a bright, singular constellation.
+  - Ensure the environment feels clean and grounded, focusing on the architectural beauty and atmospheric lighting of the traditional Dojo.
+  - Ethereal glowing particles and soft blue light wisps should be visible in the air around the mystical weapon.
 
   ${IDENTITY_PRESERVATION_GUIDE}`;
 
@@ -130,11 +133,11 @@ export const generateHistoricalImage = async (
   ];
 
   const requestConfig: any = {
-    temperature: 0.5,
+    temperature: 0.2,
     // @ts-ignore
     imageConfig: {
       aspectRatio: "2:3",
-      imageSize: "1K"
+      // imageSize: "1K"
     },
     safetySettings: safetySettings
   };
@@ -142,7 +145,7 @@ export const generateHistoricalImage = async (
   try {
     // 4. Send to Gemini
     const response = await ai.models.generateContent({
-      model: 'gemini-3.1-flash-image-preview',
+      model: 'gemini-2.5-flash-image',
       config: requestConfig,
       contents: [
         {

@@ -263,7 +263,7 @@ export const CameraCapture: React.FC<CameraCaptureProps> = ({ era, onCapture, on
       {!isProcessing && (
         <div className="absolute bottom-0 left-0 right-0 p-10 pb-16 z-20 flex justify-center items-center gap-8 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
           {/* Upload Button */}
-          {/*           
+
           <input
             type="file"
             ref={fileInputRef}
@@ -277,7 +277,7 @@ export const CameraCapture: React.FC<CameraCaptureProps> = ({ era, onCapture, on
             className="p-4 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white/30 transition-colors disabled:opacity-50"
           >
             <Upload size={24} />
-          </button> */}
+          </button>
 
           {/* Capture Button */}
           <button

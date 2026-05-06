@@ -65,7 +65,7 @@ export const CapturePreview: React.FC<CapturePreviewProps> = ({
         <div className="flex gap-4">
           <button
             onClick={onRetake}
-            className="group flex items-center justify-center gap-4 px-12 py-5 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-blue-600 hover:to-indigo-600 text-white font-black rounded-[24px] shadow-[0_12px_30px_rgba(30,144,255,0.3)] border-b-4 border-blue-800 active:border-0 active:translate-y-1 transition-all duration-300 min-w-[280px]"
+            className="group flex items-center justify-center gap-4 px-12 py-5 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-blue-500 hover:to-cyan-500 text-white font-black rounded-[24px] shadow-[0_12px_30px_rgba(0,255,255,0.3)] border-b-4 border-cyan-700 active:border-0 active:translate-y-1 transition-all duration-300 min-w-[280px]"
           >
             <RotateCcw className="w-7 h-7 group-hover:rotate-[-45deg] transition-transform" />
             <span className="text-xl uppercase tracking-widest brand-font">Retake Photo</span>
@@ -74,13 +74,8 @@ export const CapturePreview: React.FC<CapturePreviewProps> = ({
       </div>
 
       <style>{`
-        @font-face {
-          font-family: 'Lalezar';
-          src: url('./Lalezar-Regular.ttf') format('truetype');
-          font-weight: normal; font-style: normal;
-        }
         .brand-font {
-          font-family: 'Lalezar', cursive;
+          font-family: 'Cinzel', serif;
         }
 
         @keyframes scale-in {

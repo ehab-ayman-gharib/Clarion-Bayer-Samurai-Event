@@ -46,23 +46,20 @@ export const PortalRing: React.FC<PortalRingProps> = ({ size = 480 }) => {
     const rings: THREE.Mesh[] = [];
     const baseRadius = 2.4;
 
-    // Deep Indigo/Purple Nebula Background (Very soft and thick)
-    rings.push(makeTorus(baseRadius, 0.55, 0x4400ff, 0.12, 0.4));
-    rings.push(makeTorus(baseRadius, 0.65, 0x1a0088, 0.08, -0.3));
+    // Outer Cyan Energy Shell (Ethereal aura)
+    rings.push(makeTorus(baseRadius, 0.45, 0x00ffff, 0.15, 0.5));
+    rings.push(makeTorus(baseRadius, 0.55, 0x0088ff, 0.10, -0.4));
 
-    // Deep Electric Blue Core (Main body of the ring)
-    rings.push(makeTorus(baseRadius, 0.18, 0x1a3fff, 0.5, 1.2));
-    rings.push(makeTorus(baseRadius, 0.22, 0x0044ff, 0.3, -0.8));
+    // Electric Blue Blade-Edge (Sharp and fast)
+    rings.push(makeTorus(baseRadius, 0.08, 0x00ffff, 0.8, 2.8));
+    rings.push(makeTorus(baseRadius * 1.02, 0.03, 0x00ccff, 0.6, -3.5));
 
-    // Bright Cyan Accents (Energetic highlights)
-    rings.push(makeTorus(baseRadius * 1.01, 0.05, 0x00ffff, 0.7, 2.5));
-    rings.push(makeTorus(baseRadius * 0.99, 0.03, 0x88ffff, 0.5, -3.2));
+    // Radiant White Spine Core (The glowing rachis)
+    rings.push(makeTorus(baseRadius, 0.04, 0xffffff, 1.0, 1.5));
+    rings.push(makeTorus(baseRadius * 0.98, 0.02, 0xccffff, 0.4, 1.2));
 
-    // Bright White Central Core (Pure energy focus)
-    rings.push(makeTorus(baseRadius, 0.04, 0xffffff, 0.9, 1.8));
-
-    // Purple Energy Trails
-    rings.push(makeTorus(baseRadius * 1.05, 0.08, 0x8800ff, 0.2, 0.6));
+    // Secondary Cyan Energy Whisps
+    rings.push(makeTorus(baseRadius * 1.05, 0.06, 0x00ffff, 0.2, 0.8));
 
     rings.forEach(r => scene.add(r));
 
@@ -72,10 +69,10 @@ export const PortalRing: React.FC<PortalRingProps> = ({ size = 480 }) => {
     const colorArray = new Float32Array(particleCount * 3);
 
     const colors = [
-        new THREE.Color(0x1a3fff), // Deep Blue
         new THREE.Color(0x00ffff), // Cyan
+        new THREE.Color(0x00ccff), // Sky Blue
         new THREE.Color(0xffffff), // White
-        new THREE.Color(0x8800ff)  // Purple
+        new THREE.Color(0x0044ff)  // Deep Cyan/Blue
     ];
 
     for (let i = 0; i < particleCount; i++) {

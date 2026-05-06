@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { EraData, FaceDetectionResult } from '../types';
 import { Download, RotateCcw, Share2, QrCode, Loader2, Printer, CheckCircle2, XCircle } from 'lucide-react';
-import { applyEraStamp } from '../services/stampService';
+
 
 interface ResultScreenProps {
   imageSrc: string;
@@ -69,15 +69,12 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({ imageSrc, rawImage, 
     const uploadImage = async () => {
       if (!imageSrc) return;
       setIsUploading(true);
+      setQrCodeUrl(null); // Reset before attempt
+
       try {
-        let blob: Blob;
-        if (imageSrc.startsWith('data:')) {
-          const response = await fetch(imageSrc);
-          blob = await response.blob();
-        } else {
-          const response = await fetch(imageSrc);
-          blob = await response.blob();
-        }
+        console.log('[QR API] Starting upload process...');
+        const response = await fetch(imageSrc);
+        const blob = await response.blob();
 
         const formData = new FormData();
         formData.append('image', blob, 'result.png');
@@ -89,17 +86,43 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({ imageSrc, rawImage, 
           prompt: prompt
         }));
 
-        const response = await fetch('https://qr-web-api.vercel.app/upload', {
-          method: 'POST',
-          body: formData,
-        });
+        let apiResponse = null;
+        const maxAttempts = 3;
 
-        if (!response.ok) throw new Error('Upload failed');
+        for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+          try {
+            console.log(`[QR API] Upload attempt ${attempt}/${maxAttempts}...`);
+            const uploadRes = await fetch('https://qr-web-api.vercel.app/upload', {
+              method: 'POST',
+              body: formData,
+            });
 
-        const data = await response.json();
-        setQrCodeUrl(data.qrCodeUrl);
+            if (uploadRes.ok) {
+              apiResponse = await uploadRes.json();
+              console.log('[QR API] Upload successful:', apiResponse);
+              break;
+            } else {
+              const errorText = await uploadRes.text();
+              console.warn(`[QR API] Attempt ${attempt} failed with status ${uploadRes.status}:`, errorText);
+            }
+          } catch (e) {
+            console.warn(`[QR API] Attempt ${attempt} encountered error:`, e);
+          }
+
+          if (attempt < maxAttempts) {
+            const delay = Math.pow(2, attempt) * 1000;
+            console.log(`[QR API] Waiting ${delay}ms before next attempt...`);
+            await new Promise(r => setTimeout(r, delay));
+          }
+        }
+
+        if (apiResponse?.qrCodeUrl) {
+          setQrCodeUrl(apiResponse.qrCodeUrl);
+        } else {
+          throw new Error('Failed to retrieve QR code URL after retries');
+        }
       } catch (error) {
-        console.error('Error uploading image:', error);
+        console.error('[QR API] Final Error:', error);
       } finally {
         setIsUploading(false);
       }
@@ -136,7 +159,7 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({ imageSrc, rawImage, 
 
         // Generate the version with margins for printing
         const startTime = Date.now();
-        const printableImage = await applyEraStamp(rawImage, era, true);
+        const printableImage = rawImage;
 
         console.log('[ResultScreen] Calling ipcRenderer.invoke("print-image")...');
         const result = await ipcRenderer.invoke('print-image', { imageSrc: printableImage, printerName: selectedPrinter });
@@ -409,7 +432,7 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({ imageSrc, rawImage, 
 
                 <button
                   onClick={handlePrint}
-                  className="flex items-center gap-3 px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold rounded-2xl transition-all shadow-[0_10px_20px_rgba(0,0,0,0.3)] active:scale-95 group border-b-4 border-indigo-700 active:border-b-0"
+                  className="flex items-center gap-3 px-8 py-4 bg-cyan-600 hover:bg-cyan-500 text-white font-extrabold rounded-2xl transition-all shadow-[0_10px_20px_rgba(0,255,255,0.2)] active:scale-95 group border-b-4 border-cyan-700 active:border-b-0"
                 >
                   <Printer size={22} className="group-hover:rotate-12 transition-transform" />
                   <span className="text-sm uppercase tracking-wider">Print Photo</span>
@@ -418,7 +441,7 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({ imageSrc, rawImage, 
 
               <button
                 onClick={onRestart}
-                className="flex items-center justify-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white font-extrabold rounded-2xl hover:bg-white/20 transition-all active:scale-95 shadow-xl"
+                className="flex items-center justify-center gap-3 px-8 py-4 bg-orange-600 hover:bg-orange-500 text-white font-extrabold rounded-2xl transition-all shadow-[0_10px_20px_rgba(255,165,0,0.2)] active:scale-95 group border-b-4 border-orange-700 active:border-b-0"
               >
                 <RotateCcw size={20} />
                 <span className="text-sm uppercase tracking-wider">New Adventure</span>

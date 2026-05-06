@@ -3,93 +3,84 @@ import { EraData, EraId } from './types';
 /**
  * IDENTITY_PRESERVATION_GUIDE:
  * These instructions ensure Gemini 3 Flash Image maintains the user's likeness 
- * while accurately rendering the complex textures of Egyptian heritage materials.
+ * while accurately rendering the mystical Samurai aesthetic.
  */
-export const IDENTITY_PRESERVATION_GUIDE = `REQUIREMENTS:
+export const IDENTITY_PRESERVATION_GUIDE = `STRICT VISUAL REQUIREMENTS:
 - CRITICAL: Maintain exact facial features, bone structure, and skin tone. No facial morphing.
-- Wardrobe: ABSOLUTE MANDATORY COMPLETE REPLACEMENT. The AI must ERASE all original clothing from the reference image. The subject must ONLY wear the new high-quality casual attire specified. NO TRACE of the original garment should remain.
-- Style: Hyper-realistic commercial photography, 8k resolution, shot on 35mm lens, f/1.8 for slight background bokeh.
-- Lighting: Accurate volumetric lighting that wraps realistically around the subject's silhouette according to the environmental time of day.`;
+- THE FEATHER BLADE: The weapon is a single, large, magnificent CYAN FEATHER (not metal). It has a vibrant electric blue glowing spine (rachis) that emits intense mystical light. A realistic Japanese Katana hilt (tsuka) with traditional wrap (ito) is attached to the base of the feather.
+- WARDROBE: ABSOLUTE MANDATORY COMPLETE REPLACEMENT. The subject must wear high-quality, weighted, traditional black or dark indigo samurai robes (kimono and hakama). NO TRACE of the original garment should remain.
+- LIGHTING: Extremely dynamic and high-contrast. The PRIMARY light source is the glowing feather blade, casting strong cyan/blue light and rim lighting onto the character's face, hands, and the folds of their robes.
+- STYLE: High-fidelity cinematic photography, photorealistic execution, epic heroic scale, 8k resolution, masterful composition.`;
 
 /**
  * LIGHTING_STYLES:
- * Randomized lighting conditions to provide variety across generations.
+ * Variations of the Dojo atmosphere.
  */
 export const LIGHTING_STYLES = [
-  "Bright, clear Egyptian morning. Crisp, natural morning sunlight with high-clarity visibility.",
-  "Warm Golden Hour. Rich, amber-toned late afternoon sunlight casting long, dramatic, and warm shadows.",
-  "Soft Morning Mist. Diffused, ethereal lighting through a light morning haze, creating a soft and magical feel.",
-  "High Noon Clarity. Intense, direct desert sunlight with sharp shadows and high-contrast architectural details.",
-  "Vivid Afternoon. Saturated colors and sharp-focus lighting under a bright, cloudless sky.",
-  "Cinematic Neo-Cairo Night. Deep indigo and midnight blue sky with vibrant glowing neon and LED illuminates reflecting off the limestone.",
-  "Midnight Twilight (Blue Hour). A deep, cooling blue sky with the first city lights flickering to life, adding a high-tech glow."
+  "Primary cyan light from the blade, with sharp high-contrast shadows. Subtle warm amber glow from distant lanterns behind shoji screens.",
+  "Ethereal blue aura from the feather blade illuminating a misty night dojo. Soft volumetric cyan light rays.",
+  "Deep indigo night shadows, with intense electric blue rim lighting tracing the subject's silhouette from the glowing weapon.",
+  "Cinematic moonlight filtered through shoji screens, mixing with the dominant neon cyan glow of the mystical feather.",
+  "A dark, atmospheric dojo where the only light is the pulsing electric blue spine of the feather blade reflecting on the tatami."
 ];
-
-
 
 /**
  * MALE_WARDROBE_STYLES:
- * Casual modern menswear utilizing high-quality Egyptian cotton and linen.
+ * Traditional Samurai attire for men.
  */
 export const MALE_WARDROBE_STYLES = [
-  "a crisp white Egyptian cotton t-shirt paired with perfectly fitted indigo denim jeans and clean white sneakers.",
-  "a casual navy blue premium cotton crew-neck sweater worn over charcoal tailored chinos for a modern, simple look.",
-  "a smart-casual textured grey blazer layered over a plain black luxury cotton t-shirt and charcoal trousers.",
-  "a relaxed olive green linen button-down shirt, worn unbuttoned over a white tee with classic blue jeans.",
-  "a modern navy blue polo shirt made of fine Egyptian cotton, paired with beige linen trousers."
+  "traditional weighted black samurai kimono and hakama with a silver-threaded obi belt.",
+  "dark indigo formal samurai robes with subtle textured embroidery on the shoulders.",
+  "a charcoal-grey Ronin-style kimono with tattered edges and weighted hakama pants.",
+  "deep black samurai armor-layered kimono with a focus on heavy fabric folds.",
+  "midnight blue traditional martial arts gi with weighted hakama and silk wraps."
 ];
 
 /**
  * FEMALE_WARDROBE_STYLES:
- * Simple, elegant feminine attire focused on clean lines and premium fabrics.
+ * Traditional Samurai attire for women.
  */
 export const FEMALE_WARDROBE_STYLES = [
-  "a simple and elegant long-sleeved silk-blend blouse in a soft lilac tone, paired with light-coloured cotton pants.",
-  "a modern, minimalist solid-colored Egyptian linen dress in a soft neutral tone with simple clean lines.",
-  "a stylish white linen tunic with subtle traditional embroidery, paired with slim-fit dark navy trousers.",
-  "a casual yet chic terracotta-colored cotton jumpsuit with a cinched waist and wide legs.",
-  "a refined emerald green silk shirt tucked into high-waisted beige linen pants for a timeless look."
+  "an elegant weighted black silk kimono with indigo hakama and a decorative obi.",
+  "dark indigo traditional female samurai robes, featuring layered sleeves and a high collar.",
+  "a midnight black combat-ready kimono with a simple indigo hakama for fluid movement.",
+  "deep charcoal female samurai attire with subtle floral patterns etched into the dark fabric.",
+  "a sleek, dark navy silk kimono with a contrasting cyan-threaded belt."
 ];
 
 /**
- * ERAS:
- * Expanded landmark prompts with specific architectural depth 
- * and localized Cairene lighting environments.
+ * STANCES:
+ * Representing different Combat Stances and Dojo Settings.
  */
 export const ERAS: EraData[] = [
   {
-    id: EraId.KHAN,
-    name: 'Khan el-Khalili',
-    nameAr: 'خان الخليلي',
-    description: 'A labyrinth of light and history.',
-    promptInstructions: 'A cinematic view of a narrow, historic Khan el-Khalili alley. Ancient limestone walls and deep stone arches are filled with vibrant textiles and polished brass bazaar shops. The cobblestone street is clean, with subtle glowing blue LED accents tracing the edges.'
+    id: EraId.GUARDIAN, 
+    name: 'The Guardian Stance',
+    description: 'A defensive, low-center combat stance.',
+    promptInstructions: 'The character is in a low, wide defensive combat stance (kendo style), holding the glowing cyan feather blade horizontally with both hands in front of them. Dark, moody Dojo background with authentic tatami floor.'
   },
   {
-    id: EraId.TAHRIR,
-    name: 'Tahrir Square',
-    nameAr: 'ميدان التحرير',
-    description: 'The pulse of Neo-Cairo.',
-    promptInstructions: 'A grand cinematic view of Tahrir Square under clear skies. The central Obelisk is a skyscraper-sized pillar of light. The surrounding circular roads are ribbons of glowing neon purple and blue. The red facade of the Egyptian Museum is elegantly illuminated by architectural lighting.'
+    id: EraId.LOTUS,
+    name: 'The Striking Lotus',
+    description: 'An aggressive overhead striking pose.',
+    promptInstructions: 'The character is in a dramatic overhead combat stance (iaido style), holding the glowing feather blade high with both hands. Intense cyan light illuminates the subject from above. Shoji screen windows in the deep background.'
   },
   {
-    id: EraId.NILE,
-    name: 'The Nile & Qasr al-Nil',
-    nameAr: 'النيل وقصر النيل',
-    description: 'Where the river meets the grid.',
-    promptInstructions: 'Standing on the Qasr al-Nil bridge under a vast, clear sky. The heavy black steel rivets are traced with glowing teal LED lines. The iconic bronze lions have subtle amber ocular sensors. The Nile river below flows like dark liquid mercury, reflecting the neon skyline.'
+    id: EraId.SHADOW,
+    name: 'The Shadow Dualist',
+    description: 'A side-profile focused combat pose.',
+    promptInstructions: 'A dramatic side-profile view of the warrior in a mid-combat lunge. The glowing cyan feather blade points forward, casting a strong blue glow on the subject\'s profile. Ethereal glowing particles drift around the blade.'
   },
   {
-    id: EraId.DOWNTOWN,
-    name: 'Downtown (Khedivial Cairo)',
-    nameAr: 'وسط البلد الخديوية',
-    description: 'Belle Époque architecture reimagined.',
-    promptInstructions: 'A vibrant street scene at Talaat Harb Square. Ornate 19th-century European-style facades are draped in vertical gardens and subtle glowing architectural highlights. Retro-futuristic hover-taxis glide between the French-style balconies.'
+    id: EraId.SILENT,
+    name: 'The Silent Blade',
+    description: 'A calm, focused ready stance.',
+    promptInstructions: 'The character is standing in a calm, focused Chudan-no-kamae stance, holding the feather blade centered. Soft blue light wisps drift around the weapon. Subtle warm amber glow from lanterns behind shoji screens.'
   },
   {
-    id: EraId.TOWER,
-    name: 'Cairo Tower',
-    nameAr: 'برج القاهرة',
-    description: 'The Lotus of the Future.',
-    promptInstructions: 'A vertical composition looking up at the Cairo Tower. The concrete lotus mesh is filled with translucent smart-glass panels that change color. The base of the tower is surrounded by a dense solarpunk forest on Gezira Island, with glowing tropical flora and white maglev tracks winding through the palm trees.'
+    id: EraId.ASCENDANT,
+    name: 'The Heroic Ascendance',
+    description: 'A triumphant, epic combat pose.',
+    promptInstructions: 'An epic low-angle shot of the warrior standing tall in a heroic combat pose. The glowing feather blade is held diagonally. The electric blue spine of the feather emits intense mystical light, creating a majestic rim lighting.'
   }
 ];

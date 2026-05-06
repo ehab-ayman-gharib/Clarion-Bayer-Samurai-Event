@@ -15,11 +15,11 @@ export const PortalCountdown: React.FC<PortalCountdownProps> = ({ count }) => {
       <div
         className="absolute inset-0 flex items-center justify-center select-none pointer-events-none"
         style={{
-          fontFamily: '"Lalezar", cursive',
+          fontFamily: '"KyivTypeSerif", serif',
           fontSize: '9rem',
           lineHeight: 1,
           color: '#ffffff',
-          textShadow: '0 0 15px #00ffff, 0 0 30px #00ffff, 0 0 50px #ff00ff',
+          textShadow: '0 0 15px #00ffff, 0 0 30px #00ffff',
           paddingBottom: '1.5rem' // Fine-tune vertical centering with the ring
         }}
       >

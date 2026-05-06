@@ -126,6 +126,77 @@ function findBestPrinter(configuredName, availablePrinters) {
     return configuredName;
 }
 
+// Get Featured Images Info
+ipcMain.handle('get-featured-info', async () => {
+    const featuredPath = app.isPackaged
+        ? path.join(app.getPath('userData'), 'Featured')
+        : path.join(__dirname, '../Featured');
+
+    if (!fs.existsSync(featuredPath)) {
+        fs.mkdirSync(featuredPath, { recursive: true });
+    }
+
+    const files = fs.readdirSync(featuredPath)
+        .filter(f => f.match(/\.(jpg|jpeg|png|webp)$/i))
+        .map(f => path.join(featuredPath, f));
+
+    return { count: files.length, files };
+});
+
+// Sync Featured Images from Cloudinary
+ipcMain.handle('sync-featured-images', async (event, imageData) => {
+    const axios = require('axios');
+    const featuredPath = app.isPackaged
+        ? path.join(app.getPath('userData'), 'Featured')
+        : path.join(__dirname, '../Featured');
+
+    if (!fs.existsSync(featuredPath)) {
+        fs.mkdirSync(featuredPath, { recursive: true });
+    }
+
+    try {
+        const localFiles = fs.readdirSync(featuredPath);
+        const remoteIds = imageData.map(img => `${img.id}${path.extname(img.url)}`);
+
+        // Cleanup local files not in remote list (Differential Sync)
+        for (const file of localFiles) {
+            if (!remoteIds.includes(file)) {
+                console.log(`[Sync] Deleting local file: ${file} (not in Cloudinary)`);
+                fs.unlinkSync(path.join(featuredPath, file));
+            }
+        }
+
+        // Download missing files
+        for (const img of imageData) {
+            const ext = path.extname(img.url);
+            const fileName = `${img.id}${ext}`;
+            const filePath = path.join(featuredPath, fileName);
+
+            if (!fs.existsSync(filePath)) {
+                console.log(`[Sync] Downloading new featured image: ${fileName}...`);
+                const response = await axios({
+                    url: img.url,
+                    method: 'GET',
+                    responseType: 'stream'
+                });
+
+                const writer = fs.createWriteStream(filePath);
+                response.data.pipe(writer);
+                await new Promise((resolve, reject) => {
+                    writer.on('finish', resolve);
+                    writer.on('error', reject);
+                });
+            }
+        }
+
+        const finalFiles = fs.readdirSync(featuredPath).filter(f => f.match(/\.(jpg|jpeg|png|webp)$/i));
+        return { success: true, count: finalFiles.length };
+    } catch (error) {
+        console.error('[Sync] Error syncing featured images:', error);
+        return { success: false, error: error.message };
+    }
+});
+
 // Get list of printers
 ipcMain.handle('get-printers', async () => {
     console.log('[Electron] get-printers IPC called');

@@ -1,9 +1,9 @@
 {
-  "name": "tahrir-culturefest",
+  "name": "clarion-bayer-samurai-event",
   "private": true,
   "version": "0.0.1",
   "author": "5DVR",
-  "description": "Tahrir CultureFest Photobooth Application",
+  "description": "Clarion Bayer Samurai Event Application",
   "main": "electron/main.cjs",
   "type": "module",
   "scripts": {
@@ -15,7 +15,10 @@
   },
   "dependencies": {
     "@google/genai": "^1.32.0",
+    "@react-three/fiber": "^9.6.1",
     "@tensorflow/tfjs": "^1.7.4",
+    "@types/three": "^0.184.0",
+    "axios": "^1.16.0",
     "face-api.js": "^0.22.2",
     "lucide-react": "^0.557.0",
     "react": "^19.2.1",
@@ -36,8 +39,8 @@
     "wait-on": "^9.0.3"
   },
   "build": {
-    "appId": "com.5dvr.tahrirculturefest",
-    "productName": "Tahrir CultureFest",
+    "appId": "com.5dvr.clarionbayer",
+    "productName": "Clarion Bayer",
     "directories": {
       "output": "release"
     },
