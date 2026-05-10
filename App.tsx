@@ -129,8 +129,15 @@ const App: React.FC = () => {
         }
 
         const data = await response.json();
-        const cloudinaryImages = data.resources || [];
-        console.log(`[Cloudinary Sync] Found ${cloudinaryImages.length} images on cloud.`);
+        const allFeaturedImages = data.resources || [];
+        
+        // Filter: Only include images that belong to this project's folder
+        const projectFolder = 'Clarion-Bayer-Samurai-Event';
+        const cloudinaryImages = allFeaturedImages.filter((img: any) => 
+          img.public_id.startsWith(`${projectFolder}/`)
+        );
+
+        console.log(`[Cloudinary Sync] Found ${allFeaturedImages.length} total featured images. ${cloudinaryImages.length} belong to this project.`);
 
         setIsSyncing(true);
         const imageData = cloudinaryImages.map((img: any) => ({

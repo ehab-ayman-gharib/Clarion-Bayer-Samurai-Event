@@ -129,7 +129,7 @@ function findBestPrinter(configuredName, availablePrinters) {
 // Get Featured Images Info
 ipcMain.handle('get-featured-info', async () => {
     const featuredPath = app.isPackaged
-        ? path.join(app.getPath('userData'), 'Featured')
+        ? path.join(process.resourcesPath, 'Featured')
         : path.join(__dirname, '../Featured');
 
     if (!fs.existsSync(featuredPath)) {
@@ -147,7 +147,7 @@ ipcMain.handle('get-featured-info', async () => {
 ipcMain.handle('sync-featured-images', async (event, imageData) => {
     const axios = require('axios');
     const featuredPath = app.isPackaged
-        ? path.join(app.getPath('userData'), 'Featured')
+        ? path.join(process.resourcesPath, 'Featured')
         : path.join(__dirname, '../Featured');
 
     if (!fs.existsSync(featuredPath)) {
@@ -156,7 +156,10 @@ ipcMain.handle('sync-featured-images', async (event, imageData) => {
 
     try {
         const localFiles = fs.readdirSync(featuredPath);
-        const remoteIds = imageData.map(img => `${img.id}${path.extname(img.url)}`);
+        const remoteIds = imageData.map(img => {
+            const sanitizedId = img.id.replace(/\//g, '_');
+            return `${sanitizedId}${path.extname(img.url)}`;
+        });
 
         // Cleanup local files not in remote list (Differential Sync)
         for (const file of localFiles) {
@@ -169,7 +172,9 @@ ipcMain.handle('sync-featured-images', async (event, imageData) => {
         // Download missing files
         for (const img of imageData) {
             const ext = path.extname(img.url);
-            const fileName = `${img.id}${ext}`;
+            // Flatten the ID by replacing slashes with underscores to avoid directory errors
+            const sanitizedId = img.id.replace(/\//g, '_');
+            const fileName = `${sanitizedId}${ext}`;
             const filePath = path.join(featuredPath, fileName);
 
             if (!fs.existsSync(filePath)) {

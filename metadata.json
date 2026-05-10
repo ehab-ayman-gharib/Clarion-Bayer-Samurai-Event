@@ -1,6 +1,6 @@
 {
-  "name": "Egypt's Time Machine",
-  "description": "A time-traveling photobooth that transforms you into historical Egyptian eras using Gemini AI and facial detection.",
+  "name": "Clarion Bayer Samurai Event",
+  "description": "Cancer Fighters Event",
   "requestFramePermissions": [
     "camera"
   ]
