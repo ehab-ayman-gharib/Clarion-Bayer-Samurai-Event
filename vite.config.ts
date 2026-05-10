@@ -20,9 +20,9 @@ export default defineConfig(({ mode }) => {
           maximumFileSizeToCacheInBytes: 5242880, // 5 MiB
         },
         manifest: {
-          name: "Egypt's Time Machine",
-          short_name: 'EgyptTM',
-          description: "Journey through Egypt's history with AI",
+          name: "Samurai",
+          short_name: 'Samurai',
+          description: "Cancer Fighters Event",
           theme_color: '#0f172a',
           background_color: '#0f172a',
           display: 'fullscreen',
